@@ -6,55 +6,74 @@ const input = require('readline-sync');
 let candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
 
-let question = ["Who was the first American woman in space?"];
-let correctAnswer = ["Correct Answer: Sally Ride"];
-let candidateAnswer = [""];
+let question = "Who was the first American woman in space?";
+let correctAnswer = "Correct Answer: Sally Ride";
+let candidateAnswer = "";
 
-let questions = ["True or False: 5 kilometer == 5000 meters?"];
-let correctAnswers = ["true"];
-let candidateAnswers = "";
-
-let question3 = ["(5 + 3)/2 * 10 = ?"];
-let correctAnswer3 = ["40"];
-let candidateAnswer3 = ["40"];
-
-let question4 = ["Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2?"];
-let correctAnswer4 = ["Trajectory"];
-let candidateAnswer4 = ["Trajectory"];
-
-let question5 = ["What is the minimum crew size for the ISS?"];
-let correctAnswer5 = ["3"];
-let candidateAnswer5 = ["3"];
-
-let allQuestions = [question, questions, question3, question4, question5];
+let questions = ['Who was the first American woman in space?', 'True or False: 5 kilometer == 5000 meters?' , '(5 + 3)/2 * 10 = ?' , "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2?" , 'What is the minimum crew size for the ISS?'];
+let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"];
+let candidateAnswers = [];
 
 function askForName() {
-  candidateName = input.question("What is your name?");
+  candidateName = input.question("Candidate what is your name?");
   // TODO 1.1b: Ask for candidate's name 
 }
 function askQuestion() {
-  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-   let questionsAsked = input.question();
+  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswers//
 
-for (let i = 0; i < questionsAsked.length; i++) {
-  console.log(questionsAsked);
+for (let i =0; i < questions.length; i++) {
+  // before you log their answer, you gotta ask a question
+  let candidateResponse = input.question(questions[i])
+  // console.log('\n')
+  candidateAnswers.push(candidateResponse);
+
+  // check if their answer is correct
+  // give feedback and add to score (global variable)
 }
 }
+// iterate through your array [i]
+function gradeQuiz(candidateAnswers) {
 
-function gradeQuiz() {
-  candidateAnswer = input.question(correctAnswer);
+  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly
+console.log('Candidate Name:' , candidateName)
+let answers = "Sally Ride, true, 40, Trajectory, 3";
 
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+  for (let i = 0; i < candidateAnswers.length; i++) {
+    console.log(`${i + 1} ${questions[i]}`)
+    console.log(`Your Answer: ${candidateAnswers[i]}`) 
+    console.log(`Correct Answer: ${correctAnswers[i]}\n`)
 
-  // console.log(` Jane answered her first question as ${question}, her 2nd question as ${questions}, her 3rd as ${question3}, her 4th as ${question4}, and her 5th as ${question5}`);
+  }
+let pointsGained = 0
+let numOfQuest = 5
+let totalAvg = 100
 
-  // console.log(` The correct answers to question 1 is ${correctAnswer}, question 2 is ${correctAnswers}, question 3 is ${correctAnswer3}, question 4 is ${correctAnswer4}, and question 5 is ${correctAnswer5}`);
+  for (let i = 0; i < correctAnswers.length; i++){
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      correctAnswers[1]
+    
+      // numOfQuest += 1
+      // console.log(candidateAnswers)
+      pointsGained += 1
+    }
+  } 
+  let grade = pointsGained / numOfQuest *100
 
-  let grade;
-  
+  console.log(`>>> Overall Grade: ${grade}% (${pointsGained} out of 5 responses correct) <<<`);
+
+let status = ""; 
+
+  if (grade < 80 ) {
+      console.log('>>> Status:','FAIL <<<')
+  } else {
+    console.log('>>> PASS <<<')
+  }
+
 
   return grade;
+  let overallGrade = [];
 }
+
 
 function runProgram() {
   askForName();
@@ -63,6 +82,7 @@ function runProgram() {
 
   askQuestion();
   gradeQuiz(this.candidateAnswers);
+  
 }
 
 // Don't write any code below this line //
@@ -78,3 +98,5 @@ module.exports = {
   gradeQuiz: gradeQuiz,
   runProgram: runProgram
 };
+
+
